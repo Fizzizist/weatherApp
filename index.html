@@ -1,0 +1,19 @@
+<head>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script>
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(function(position) {
+                $.getJSON("https://fcc-weather-api.glitch.me/api/current?lat="+position.coords.latitude+"&lon="+position.coords.longitude, function(json){
+                    $("#city").html("The current weather in " + json.name + " is:");
+                    $("#weather").html(json.main.temp+"°C, " + json.weather[0].main + ", " + json.weather[0].description + "<br><img src=" + json.weather[0].icon+">");
+                });
+            });
+        }
+    </script>
+</head>
+<body>
+    <h1>Generic Weather App</h1>
+    <h2 id="city">You need to share your location for this to work.</h2>
+    <p id="weather"></p>
+</body>
